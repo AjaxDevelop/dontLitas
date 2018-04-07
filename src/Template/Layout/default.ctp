@@ -26,8 +26,17 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
+    <!-- Bootstrap CSS -->
+    <?= $this->Html->css('bootstrap/bootstrap.min.css') ?>
+
+    <!-- Jquery Javascript -->
+    <?= $this->Html->script('jquery/jquery-3.2.1.slim.min.js') ?>
+
+    <!-- Popper Javascript -->
+    <?= $this->Html->script('popper/popper.min.js') ?>
+
+    <!-- Bootstrap Javascript -->
+    <?= $this->Html->script('bootstrap/bootstrap.min.js') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
