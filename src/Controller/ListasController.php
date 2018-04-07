@@ -20,6 +20,8 @@ class ListasController extends AppController
      */
     public function index()
     {
+        debug($slug);
+
         $listas = $this->paginate($this->Listas);
 
         $this->set(compact('listas'));
@@ -32,11 +34,11 @@ class ListasController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($acesso = null)
     {
-        $lista = $this->Listas->get($id, [
+        $lista = $this->Listas->find('all', [
             'contain' => ['Items']
-        ]);
+        ])->where(['Listas.acesso' => $acesso])->first();
 
         $this->set('lista', $lista);
     }
