@@ -1,55 +1,60 @@
 <?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Lista[]|\Cake\Collection\CollectionInterface $listas
- */
+
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Lista'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Items'), ['controller' => 'Items', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Item'), ['controller' => 'Items', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
 <div class="listas index large-9 medium-8 columns content">
-    <h3><?= __('Listas') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('acesso') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('lista_pai') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($listas as $lista): ?>
-            <tr>
-                <td><?= $this->Number->format($lista->id) ?></td>
-                <td><?= h($lista->acesso) ?></td>
-                <td><?= $this->Number->format($lista->lista_pai) ?></td>
-                <td><?= h($lista->created) ?></td>
-                <td><?= h($lista->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $lista->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $lista->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $lista->id], ['confirm' => __('Are you sure you want to delete # {0}?', $lista->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col"><?= $this->Paginator->sort('id', '#') ?></th>
+                            <th scope="col"><?= $this->Paginator->sort('acesso', 'Lista') ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($listas as $lista): ?>
+                        <tr>
+                            <td><?= h($lista->id) ?></td>
+
+                            <td><?php echo $this->Html->link(
+                                    h($lista->acesso),
+                                    ['controller' => 'listas', 'action' => 'view', $lista->acesso, '_full' => true]
+                                ); ?></td>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="paginator" style="color: #3f51b5;">
+                <div class="row pagination">
+                    <?php
+                        $this->Paginator->templates([
+                            'current' => '<li class="active"><a style="color: #8c8c8c" href=' . $this->Url->build([
+                                    "?" => $this->request->query
+                                ]) . '#>{{text}}</a></li>',
+
+                        ]);
+                    ?>
+                    <div class="col-lg-1 col-md-1 col-sm-2 col-12">
+                        <?= $this->Paginator->prev('' . __('Anterior')) ?>
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-8 col-12 text-center">
+                    <?= $this->Paginator->numbers() ?>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-2 col-12">
+                        <?= $this->Paginator->next(__(' Proximo') . '') ?>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="text-center"><?= $this->Paginator->counter('{{page}} de {{pages}}') ?></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

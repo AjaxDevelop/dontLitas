@@ -18,50 +18,88 @@ $cakeDescription = 'DontListas';
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-    <?= $this->Html->charset('utf-8') ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
-    </title>
-    <?= $this->Html->meta('icon') ?>
+    <head>
+        <?= $this->Html->charset('utf-8') ?>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>
+            <?= $cakeDescription ?>:
+            <?= $this->fetch('title') ?>
+        </title>
+        <?= $this->Html->meta('icon') ?>
 
-    <!-- Bootstrap CSS -->
-    <?= $this->Html->css('bootstrap/bootstrap.min.css') ?>
+        <!-- Bootstrap CSS -->
+        <?= $this->Html->css('bootstrap/bootstrap.min.css') ?>
 
-    <!-- Jquery Javascript -->
-    <?= $this->Html->script('jquery/jquery-3.2.1.slim.min.js') ?>
+        <!-- MdbFree CSS -->
+        <?= $this->Html->css('mdbfree/mdb.min.css') ?>
 
-    <!-- Popper Javascript -->
-    <?= $this->Html->script('popper/popper.min.js') ?>
+        <!-- Configurações Globais CSS -->
+        <?= $this->Html->css('global') ?>
 
-    <!-- Bootstrap Javascript -->
-    <?= $this->Html->script('bootstrap/bootstrap.min.js') ?>
+        <!-- Jquery Javascript -->
+        <?= $this->Html->script('jquery/jquery-3.2.1.slim.min.js') ?>
 
-    <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
-</head>
-<body>
-    <nav class="top-bar expanded" data-topbar role="navigation">
-        <ul class="title-area large-3 medium-4 columns">
-            <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
-            </li>
-        </ul>
-        <div class="top-bar-section">
-            <ul class="right">
-                <li><a target="_blank" href="https://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
-            </ul>
+        <!-- Popper Javascript -->
+        <?= $this->Html->script('popper/popper.min.js') ?>
+
+        <!-- Bootstrap Javascript -->
+        <?= $this->Html->script('bootstrap/bootstrap.min.js') ?>
+
+        <!-- MdbFree Javascript -->
+        <?= $this->Html->script('mdbfree/mdb.min.css') ?>
+
+        <?= $this->fetch('meta') ?>
+        <?= $this->fetch('css') ?>
+        <?= $this->fetch('script') ?>
+    </head>
+    <body>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">DontListas</a>
+        </nav>
+        <?= $this->Flash->render() ?>
+        <div class="container clearfix">
+            <?= $this->fetch('content') ?>
         </div>
-    </nav>
-    <?= $this->Flash->render() ?>
-    <div class="container clearfix">
-        <?= $this->fetch('content') ?>
-    </div>
-    <footer>
-    </footer>
-</body>
+        <!--Footer-->
+        <footer class="page-footer font-small blue pt-4 mt-4">
+
+            <!--Footer Links-->
+            <div class="container-fluid text-center text-md-left">
+                <div class="row">
+
+                    <!--First column-->
+                    <div class="col-md-6">
+                        <h5 class="text-uppercase">DontListas</h5>
+                        <p>Projeto inspirado no site 'dontpad.com', entretanto, apresentando como funcionalidade o gerenciamento de listas.</p>
+                    </div>
+                    <!--/.First column-->
+
+                    <!--Second column-->
+                    <div class="col-md-6">
+                        <h5 class="text-uppercase">Links</h5>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="https://github.com/AjaxDevelop/dontLitas">Repositóriob</a>
+                            </li>
+                            <li>
+                                <a href="#!">Sobre o Projeto</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com">GitHub</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/.Second column-->
+                </div>
+            </div>
+            <!--/.Footer Links-->
+
+            <!--Copyright-->
+            <div class="footer-copyright py-3 text-center">
+                © 2018 Copyright:
+            </div>
+            <!--/.Copyright-->
+
+        </footer>
+    </body>
 </html>

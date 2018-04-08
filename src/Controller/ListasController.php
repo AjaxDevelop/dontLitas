@@ -20,9 +20,7 @@ class ListasController extends AppController
      */
     public function index()
     {
-        debug($slug);
-
-        $listas = $this->paginate($this->Listas);
+        $listas = $this->paginate($this->Listas, ['limit' => 10]);
 
         $this->set(compact('listas'));
     }
