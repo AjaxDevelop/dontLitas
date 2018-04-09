@@ -68,8 +68,89 @@ class ListasTable extends Table
         $validator
             ->integer('lista_pai')
             ->requirePresence('lista_pai', 'create')
-            ->notEmpty('lista_pai');
+            ->allowEmpty('lista_pai');
 
         return $validator;
+    }
+
+    /**
+     * Adicionar uma nova lista.
+     */
+    public function addList($acesso = null, $id_pai = null)
+    {
+        $lista = $this->newEntity();
+        $lista = $this->patchEntity($lista, ['acesso' => $acesso . '/', 'lista_pai' => $id_pai]);
+
+        $this->save($lista);
+
+        return $lista;
+    }
+
+    /**
+     * Verifica se o usuário adicionou '/' no final da url.
+     */
+    public function verificarAcesso($acesso = null)
+    {
+        if (is_null($acesso))
+        {
+            return [];
+        }
+
+        $id_anterior = null;
+        $id_pai = null;
+        $data = explode('/', $acesso);
+
+        foreach($data as $key => $value)
+        {
+            if ($value == '')
+            {
+                break;
+            }
+
+            $obj = $this->find('all')
+                ->where(['acesso' => $value . '/'])
+                ->first();
+
+            if (is_null($obj))
+            {
+                $obj = $this->addList($value, $id_anterior);
+                $id_pai = $obj->lista_pai;
+            }
+            else
+            {
+                $id_pai = null;
+            }
+
+            $id_anterior = $obj->id;
+            $acesso = $obj->acesso;
+        }
+
+        if (substr($acesso, -1) != '/')
+        {
+            $acesso = $acesso . '/';
+        }
+
+        return [
+            'acesso' => $acesso,
+            'id_pai' => $id_pai,
+        ];
+    }
+
+    /**
+     * Buscar as Listas filhas no banco de dados
+     */
+    public function pegarListasFilhas($lista_id)
+    {
+        $listas_filhas = $this->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'acesso'
+        ])->where(['lista_pai' => $lista_id])->distinct(['acesso'])->toArray();
+
+        if (is_null($listas_filhas))
+        {
+            return [];
+        }
+
+        return $listas_filhas;
     }
 }

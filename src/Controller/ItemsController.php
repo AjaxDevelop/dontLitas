@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * Items Controller
@@ -64,27 +65,29 @@ class ItemsController extends AppController
 
     /**
      * Edit method
-     *
-     * @param string|null $id Item id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit()
     {
-        $item = $this->Items->get($id, [
-            'contain' => ['Listas']
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $item = $this->Items->patchEntity($item, $this->request->getData());
-            if ($this->Items->save($item)) {
-                $this->Flash->success(__('The item has been saved.'));
+        if ($this->request->is('post'))
+        {
+            $lista = TableRegistry::get('Listas')->get($this->request->getData('id'), [
+                'contain' => ['Listas']
+            ]);
 
-                return $this->redirect(['action' => 'index']);
+            $item = $this->Items->getItem($this->request->getData('item'));
+
+            if ($this->request->getData('action') == 'add')
+            {
+                $lista = $this->Items->Listas->link($lista, [$item]);
             }
-            $this->Flash->error(__('The item could not be saved. Please, try again.'));
+
+            if ($this->request->getData('action') == 'delete')
+            {
+                $lista = $this->Items->Listas->unlink($lista, [$item]);
+            }
+
+            $this->set('_serialize', ['lista']);
         }
-        $listas = $this->Items->Listas->find('list', ['limit' => 200]);
-        $this->set(compact('item', 'listas'));
     }
 
     /**

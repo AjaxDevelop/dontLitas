@@ -53,9 +53,11 @@ Router::scope('/', function (RouteBuilder $routes) {
         'controller' => 'Listas', 'action' => 'index',
     ]);
 
-    $routes->connect('/**', [
+    $routes->connect('/listas/**', [
         'controller' => 'Listas', 'action' => 'view',
     ]);
+
+    $routes->extensions(['json']);
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.

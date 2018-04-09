@@ -37,7 +37,7 @@ $cakeDescription = 'DontListas';
         <?= $this->Html->css('global') ?>
 
         <!-- Jquery Javascript -->
-        <?= $this->Html->script('jquery/jquery-3.2.1.slim.min.js') ?>
+        <?= $this->Html->script('jquery/jquery.min.js') ?>
 
         <!-- Popper Javascript -->
         <?= $this->Html->script('popper/popper.min.js') ?>
@@ -57,7 +57,7 @@ $cakeDescription = 'DontListas';
             <a class="navbar-brand" href="#">DontListas</a>
         </nav>
         <?= $this->Flash->render() ?>
-        <div class="container clearfix">
+        <div class="container clearfix wrapper">
             <?= $this->fetch('content') ?>
         </div>
         <!--Footer-->

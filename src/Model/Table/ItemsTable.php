@@ -66,4 +66,24 @@ class ItemsTable extends Table
 
         return $validator;
     }
+
+    /**
+     * Retorna o id do item
+     */
+    public function getItem($item = null)
+    {
+        $item_obj = $this->find('all')
+            ->where(['item' => $item])
+            ->first();
+
+        if (is_null($item_obj))
+        {
+            $item_obj = $this->newEntity();
+            $item_obj = $this->patchEntity($item_obj, ['item' => $item]);
+            $this->save($item_obj);
+        }
+
+        return $item_obj;
+    }
+
 }

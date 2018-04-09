@@ -1,3 +1,15 @@
+/** Global **/
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/** Container **/
+.container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
 /** Paginador **/
 .paginador {
     list-style: none;
@@ -57,19 +69,8 @@
     cursor: pointer;
 }
 
-/** Container **/
-.container {
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
-
 /** Footer **/
-footer {
-    bottom: 0;
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+.wrapper {
+    min-height: 100%;
+    margin-bottom: -50px;
 }
